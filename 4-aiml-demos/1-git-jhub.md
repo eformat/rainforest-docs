@@ -7,7 +7,7 @@
 
     ```bash
     cd /projects
-    git clone https://gitlab-ce.apps.foo-sno.sandbox1885.opentlc.com/rainforest/daintree-dev-dags.git
+    git clone https://gitlab-ce.apps.foo-sno.sandbox1234.opentlc.com/rainforest/daintree-dev-dags.git
     cd daintree-dev-dags
     echo "# rainforest/daintree-dev-dags" > README.md
     git add README.md

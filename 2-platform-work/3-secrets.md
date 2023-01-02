@@ -264,7 +264,7 @@
 16. In your IDE, Globally replace across ALL files
 
    ```bash
-   foo-sno.sandbox1965.opentlc.com ->  echo ${CLUSTER_DOMAIN##apps.}
+   foo-sno.sandbox1234.opentlc.com ->  echo ${CLUSTER_DOMAIN##apps.}
    ```
 
    ```bash

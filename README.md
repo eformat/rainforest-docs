@@ -36,7 +36,7 @@ To launch the docs, ensure you have NodeJS installed or run it in a NodeJS conta
 
 ```shell
 npm i -g docsify-cli@4.4.3
-docsify serve ./docs
+docsify serve ./
 ```
 
 * Open the browser to http://localhost:3000 to view the tech exercise.

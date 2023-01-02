@@ -104,8 +104,7 @@
         function(hook) {
           hook.beforeEach(function(content) {
 
-            fetch('config/all.json')
-            .then(function(response) {
+            fetch('config/all.json').then(function(response) {
               return response.json();
             }).then(function(jsonData) {
               console.info("🥳 YAY! Found the config file 🥳", jsonData);
@@ -124,8 +123,6 @@
                     .replaceAll('<GIT_SERVER>', gitServer);
           });
 
-
-
           const footer = `<hr/>
             <footer>
             <span><a href="https://www.redhat.com/en/services/consulting/open-innovation-labs">🥼🧪Red Hat Open Innovation Labs</a> </span>
@@ -138,7 +135,6 @@
           });
         }
       ],
-      search: 'auto', // default
       vueComponents: { }
     }    
   </script>

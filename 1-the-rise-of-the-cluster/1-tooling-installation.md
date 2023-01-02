@@ -15,7 +15,7 @@ export AWS_PROFILE=rhpds
 export AWS_DEFAULT_REGION=us-east-2
 export AWS_DEFAULT_ZONES=["us-east-2c"]
 export CLUSTER_NAME=foo-sno
-export BASE_DOMAIN=sandbox1885.opentlc.com
+export BASE_DOMAIN=sandbox.opentlc.com
 export PULL_SECRET=$(cat ~/tmp/pull-secret)
 export SSH_KEY=$(cat ~/.ssh/id_rsa.pub)
 export INSTANCE_TYPE=m6a.4xlarge
@@ -226,30 +226,44 @@ Wait for ipa to install, then create objects:
 ```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "echo <admin password> | /usr/bin/kinit admin"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "echo <ldap_admin password> | \
 ipa user-add ldap_admin --first=ldap \
 --last=admin --email=ldap_admin@redhatlabs.dev --password"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "ipa group-add-member admins --users=ldap_admin"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "ipa group-add-member editors --users=ldap_admin"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "ipa group-add-member 'trust admins' --users=ldap_admin"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
 sh -c "ipa group-add student --desc 'Student Group'"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
-sh -c "echo <user1 password> | ipa user-add user1 --first=user \
+sh -c "echo <user password> | ipa user-add <USER_NAME> --first=user \
 --last=user1 --email=user1@redhatlabs.dev --password"
+```
 
+```bash
 oc exec -it dc/ipa -n ipa -- \
-sh -c "ipa group-add-member student --users=user1"
+sh -c "ipa group-add-member student --users=<USER_NAME>"
 ```
 
 ```bash
@@ -329,7 +343,7 @@ The base tooling and operators are configured using the helm chart in the `platf
 6. FIXME rbac
 
    ```bash
-   oc adm policy add-cluster-role-to-user cluster-admin user1
+   oc adm policy add-cluster-role-to-user cluster-admin <USER_NAME>
    ```
 
 🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄
