@@ -1,6 +1,6 @@
 ## 𝌭️ Spark Pipeline
 ## Basic Apache Spark pipeline
-> spark two ways (developer cluster, google spark operator), airflow pipeline promotion
+> spark two ways (developer cluster, google spark operator), airflow pipeline promotion, spark history server
 
 1. Re(Start) the **Elyra Notebook Image with Spark**, Select **Small** container size. Use the same Env.Vars from ML Exercise. 
 
