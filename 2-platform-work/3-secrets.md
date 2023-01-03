@@ -80,7 +80,7 @@
    ```
    
    ```bash
-   export VAULT_ROUTE=vault.apps.${CLUSTER_DOMAIN}
+   export VAULT_ROUTE=vault.${CLUSTER_DOMAIN}
    export VAULT_ADDR=https://${VAULT_ROUTE}
    export VAULT_SKIP_VERIFY=true
    ```
@@ -254,6 +254,10 @@
    username=foo \
    password=bar 
    ```
+   
+   ```bash
+   vault kv get kv/$TEAM_GROUP/$PROJECT_NAME/$APP_NAME
+   ```
 
 15. Unencrypt rainforest vault-secrets file. The key to this will be provided by your instructor.
 
@@ -273,10 +277,10 @@
 
    💥 DO NOT CHECK IN the gitops/secrets/vault-rainforest file just yet !! 💥
 
-17. Create all the application secrets in vault.
+17. Create all the application secrets in vault. Run this script.
 
    ```bash
-   ./gitops/secrets/vault-rainforest
+   sh /projects/rainforest/gitops/secrets/vault-rainforest
    ```
 
 18. Encrypt rainforest vault-secrets file and check it in.
