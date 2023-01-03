@@ -53,7 +53,7 @@
    echo -e https://$(oc get route jupyterhub --template='{{ .spec.host }}' -n ${PROJECT_NAME})
    ```
 
-6. Select **Elyra Notebook Image**, Select **Small** container size, Set the following env vars, get values from DevSpaces
+6. Select **Elyra Notebook Image**, Select **Default** container size, Set the following env vars, get values from DevSpaces
 
    ```bash
    echo $CLUSTER_DOMAIN
