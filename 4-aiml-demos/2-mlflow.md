@@ -2,11 +2,11 @@
 ## Model pipeline promotion with MLFlow
 > mlflow - model lifecycle using a simple regression model, airflow pipeline promotion
 
-1. Once your notebook has opened, Click **Terminal**
+1. Once your notebook has opened
 
 2. Open **aimlops-demos/mlflow** and Click on the notebook **mlflow.ipynb**
 
-3. Install python deps
+3. Click **Terminal**, Install python deps
 
     ```bash
     pip install category_encoders matplotlib boto3 mlflow==1.27.0
@@ -32,7 +32,7 @@
    echo -e https://$(oc get route airflow --template='{{ .spec.host }}' -n ${PROJECT_NAME})
    ```
 
-10. Check logs in Airflow, and S3 logs
+10. Check dag in git, logs in Airflow, and S3 logs
 
     ```bash
     AWS_ACCESS_KEY_ID=$(oc get secret s3-auth -n ${PROJECT_NAME} -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 -d)
