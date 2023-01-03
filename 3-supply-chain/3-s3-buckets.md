@@ -8,16 +8,15 @@
    ```
    
    ```bash
-   oc -n <TEAM_NAME>-ci-cd port-forward svc/minio 9000:9000
-   ```
-
-   ```bash
    AWS_ACCESS_KEY_ID=$(oc get secret s3-auth -n ${PROJECT_NAME} -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 -d)
+   ```
+   
+   ```bash
    AWS_SECRET_ACCESS_KEY=$(oc get secret s3-auth -n ${PROJECT_NAME} -o jsonpath='{.data.AWS_SECRET_ACCESS_KEY}' | base64 -d)
    ```
    
    ```bash
-   mc alias set dev http://localhost:9000 ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} 
+   mc alias set dev http://minio.<TEAM_NAME>-ci-cd.svc.cluster.local:9000 ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} 
    ```
    
    ```bash

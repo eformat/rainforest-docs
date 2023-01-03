@@ -6,9 +6,9 @@
 
 ### SNO for 100
 
-My favourite development environment has become SNO on SPOT in AWS. With this setup, if you choose your region and zones wisely, i can have pretty much an environment running all day without interruption.
+My favourite development environment has become SNO on SPOT in AWS. With this setup, if you choose your region and zones wisely, you can have an environment running all day without interruption.
 
-For me that is *Ohio* ! To get a 16 core, 64 GB machine for less than $4 a day i use the following to install the cluster.
+For me that is *Ohio* ! To get a 16 core, 64 GB machine for less than $4 a day i use the following config to [install the cluster.](https://github.com/eformat/sno-for-100)
 
 ```bash
 export AWS_PROFILE=rhpds

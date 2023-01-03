@@ -23,7 +23,7 @@
    ```
 
 5. Observe Model params
-6. Promote and Tag Model as **TestModel** **Version1**
+6. Register Model as **TestModel** **Version1**
 7. Open **mlflow.pipeline** browse Properties
 8. Trigger Airflow Pipeline
 9. Watch build steps in Airflow
@@ -50,7 +50,7 @@
 11. Once Seldon model deployed we can check the inference end point
 
    ```bash
-   HOST=$(echo -n https://$(oc get $(oc get route -l app.kubernetes.io/managed-by=seldon-core -o name) --template='{{ .spec.host }}'))
+   HOST=$(echo -n https://$(oc -n ${PROJECT_NAME} get $(oc -n ${PROJECT_NAME} get route -l app.kubernetes.io/managed-by=seldon-core -o name) --template='{{ .spec.host }}'))
    ```
    
    ```bash

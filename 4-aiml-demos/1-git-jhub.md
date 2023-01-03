@@ -1,13 +1,13 @@
 ## 🐑️ Initialize Git Repositories, Login to JupyterHub
 ## Initialize a DAG repository for Airflow
 
-1. Gitlab, create dag repo called **daintree-dev-dags**
+1. Gitlab, under your group <TEAM_NAME>, create a dag repo called **daintree-dev-dags**
 
 2. In DevSpaces initialize dags repo.
 
     ```bash
     cd /projects
-    git clone https://gitlab-ce.apps.foo-sno.sandbox1234.opentlc.com/rainforest/daintree-dev-dags.git
+    git clone https://<GIT_SERVER>/rainforest/daintree-dev-dags.git
     cd daintree-dev-dags
     echo "# rainforest/daintree-dev-dags" > README.md
     git add README.md
@@ -18,7 +18,7 @@
 
 ## Clone code demo repo
 
-3. Clone our demo code repo
+3. Clone our demo code repo. The token will be provided by your instructor.
 
    ```bash
    export GITHUB_TOKEN=<token>
@@ -26,10 +26,10 @@
 
    ```bash
    cd /projects/
-   git clone https://$GITHUB_TOKEN@github.com/eformat/aiml-demos.git
+   git clone https://eformat:${GITHUB_TOKEN}@github.com/eformat/aiml-demos.git
    ```
 
-4. Create a project in Gitlab called **aiml-demos** and push the code.
+4. Create an Internal project in Gitlab called **aiml-demos** and push the code.
 
     ```bash
     cd /projects/aiml-demos
@@ -66,7 +66,12 @@
    
    ```bash
    AWS_ACCESS_KEY_ID=$(oc get secret s3-auth -n ${PROJECT_NAME} -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 -d)
+   echo $AWS_ACCESS_KEY_ID
+   ```
+   
+   ```bash
    AWS_SECRET_ACCESS_KEY=$(oc get secret s3-auth -n ${PROJECT_NAME} -o jsonpath='{.data.AWS_SECRET_ACCESS_KEY}' | base64 -d)
+   echo $AWS_SECRET_ACCESS_KEY
    ```
 
 8. Click **Start server** button.
