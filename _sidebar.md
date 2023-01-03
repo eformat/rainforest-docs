@@ -12,7 +12,7 @@
   * [👔 SSO](3-supply-chain/4-sso.md)
 * [4. Demos](4-aiml-demos/README.md)
   * [🐑 Git + Jupyterhub](4-aiml-demos/1-git-jhub.md)
-  * [𝌭 AIML Models](4-aiml-demos/2-mlflow.md)
+  * [𝌭 ML Models](4-aiml-demos/2-mlflow.md)
   * [𝌭️ Spark Pipeline](4-aiml-demos/3-spark.md)
   * [𝌭️ Data Modelling and Investigation](4-aiml-demos/4-data-investigation.md)
   * [𝌭️ OpenMetadata](4-aiml-demos/6-metadata.md)
