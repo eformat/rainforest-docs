@@ -255,7 +255,7 @@
    password=bar 
    ```
 
-15. Unencrypt rainforest vault-secrets file.
+15. Unencrypt rainforest vault-secrets file. The key to this will be provided by your instructor.
 
    ```bash
    ansible-vault decrypt /projects/rainforest/gitops/secrets/vault-rainforest

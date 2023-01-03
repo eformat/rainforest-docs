@@ -6,6 +6,10 @@
 2. FIXME - We are using a private git repository at the moment. DevSpaces supports this however we need to first create the credential secret. The token will be provided by your instructor.
 
    ```bash
+   export GITHUB_TOKEN=<token>
+   ```
+
+   ```bash
    oc -n <USER_NAME>-devspaces apply -f - <<EOF
    kind: Secret
    apiVersion: v1
@@ -18,18 +22,18 @@
        controller.devfile.io/watch-secret: "true"
        controller.devfile.io/mount-to-devworkspace: "true"
    stringData:
-     credentials: https://eformat:<GITHUB_TOKEN>@github.com
+     credentials: https://eformat:${GITHUB_TOKEN}@github.com
    EOF
    ```
 
-3. Create your workspace. On DevSpaces Workspaces, "Add Workspace > Import from Git". The token url will be provided by your instructor.
+3. Create your workspace. On DevSpaces Workspaces, "Add Workspace > Import from Git".
 
    <p> 
    For OpenShift 4.11+ - Enter this URL to load the dev stack:</br>
    <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
    </p>
 
-4. Login to Terminal in DevSpaces. Export env vars
+4. Login to Terminal in DevSpaces. Open a Terminal. Export env vars.
  
     ```bash
     echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc 
@@ -38,7 +42,7 @@
     ```
    
    ```bash
-   source ~/.zshrc
+   zsh
    ```
 
 5. Check if you can connect to OpenShift. Run the command below.
