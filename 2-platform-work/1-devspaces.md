@@ -3,7 +3,7 @@
 
 1. Login to your DevSpaces Editor. The link to this will be provided by your instructor.
 
-2. FIXME - We are using a private git repository at the moment. DevSpaces supports this however we need to first create the credential secret. The token will be provided by your instructor.
+2. FIXME - We are using a private git repository for the **rainforest** code at the moment. DevSpaces supports this so we need to create a credential secret first. The access token will be provided by your instructor.
 
    ```bash
    export GITHUB_TOKEN=<token>
