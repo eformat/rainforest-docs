@@ -20,3 +20,4 @@
   * [𝌭️ NLP](4-aiml-demos/8-nlp.md)
   * [𝌭️ Licence Plate Recognition](4-aiml-demos/9-license-plate-recognition.md)
   * [𝌭️ Fraud Detection](4-aiml-demos/10-fraud-detection.md)
+  * [𝌭️ Object Detection](4-aiml-demos/11-object-detection.md)
