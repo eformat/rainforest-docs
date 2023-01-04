@@ -277,10 +277,13 @@
 
    💥 DO NOT CHECK IN the gitops/secrets/vault-rainforest file just yet !! 💥
 
-17. Update trino trustore secret
+17. Update trino trustore secret with our cluster CA certs
 
    ```bash
    openssl s_client -showcerts -connect ipa.ipa.svc.cluster.local:636 </dev/null 2>/dev/null | awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' > /tmp/ipa.pem
+   ```
+   
+   ```bash
    openssl s_client -showcerts -connect api.${CLUSTER_DOMAIN##apps.}:6443 </dev/null 2>/dev/null | awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' > /tmp/oc.pem
    ```
 
@@ -299,9 +302,16 @@
 
    ```bash
    oc -n <TEAM_NAME>-ci-cd create secret generic truststore --from-file=truststore.jks
-   ## manually put the truststore.jks value ino the TRUSTSTORE="" variable in the #trino-truststore section of vault-secrets file
+   ```
+   
+   Manually update the truststore.jks value variable - TRUSTSTORE="" in the #trino-truststore section of **vault-rinforest** secrets file.
+
+   ```bash
    oc -n <TEAM_NAME>-ci-cd get secret truststore -o=jsonpath='{.data}'
-   ## remove temporary secret
+   ```
+
+   Remove temporary secret
+   ```bash
    oc -n <TEAM_NAME>-ci-cd delete secret truststore
    ```
 
@@ -311,7 +321,7 @@
    sh /projects/rainforest/gitops/secrets/vault-rainforest
    ```
 
-19. Encrypt rainforest vault-secrets file and check it in.
+19. Encrypt rainforest vault-secrets file and check all our changes in.
 
    ```bash
    ansible-vault encrypt /projects/rainforest/gitops/secrets/vault-rainforest
