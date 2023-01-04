@@ -19,3 +19,4 @@
   * [𝌭️ Observability](4-aiml-demos/7-observability.md)
   * [𝌭️ NLP](4-aiml-demos/8-nlp.md)
   * [𝌭️ Licence Plate Recognition](4-aiml-demos/9-license-plate-recognition.md)
+  * [𝌭️ Fraud Detection](4-aiml-demos/10-fraud-detection.md)
