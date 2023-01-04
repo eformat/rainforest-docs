@@ -3,53 +3,57 @@
 
 1. Create sa
 
-    ```bash
-    oc -n ${TEAM_NAME}-ci-cd create sa ${SERVICE_ACCOUNT}
-    ```
+   ```bash
+   oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
+   ```
+   
+   ```bash
+   oc -n ${TEAM_NAME}-ci-cd create sa ${SERVICE_ACCOUNT}
+   ```
 
 2. OCP 4.11+ no default token with sa
 
-    ```yaml
-    cat <<EOF | oc -n ${TEAM_NAME}-ci-cd apply -f -
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: vault-token
-      annotations:
-        kubernetes.io/service-account.name: "vault" 
-    type: kubernetes.io/service-account-token 
-    EOF
-    ```
+   ```yaml
+   cat <<EOF | oc -n ${TEAM_NAME}-ci-cd apply -f -
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: vault-token
+     annotations:
+       kubernetes.io/service-account.name: "vault" 
+   type: kubernetes.io/service-account-token 
+   EOF
+   ```
 
 3. Link secret vault-token to sa
 
-    ```bash
-    oc -n ${TEAM_NAME}-ci-cd secrets link vault vault-token
-    ```
+   ```bash
+   oc -n ${TEAM_NAME}-ci-cd secrets link vault vault-token
+   ```
 
 4. Read secrets and bind to vault sa
 
-    ```bash
-    oc adm policy add-cluster-role-to-user edit -z vault -n ${TEAM_NAME}-ci-cd
-    oc adm policy add-cluster-role-to-user system:auth-delegator -z vault -n ${TEAM_NAME}-ci-cd
-    ```
+   ```bash
+   oc adm policy add-cluster-role-to-user edit -z vault -n ${TEAM_NAME}-ci-cd
+   oc adm policy add-cluster-role-to-user system:auth-delegator -z vault -n ${TEAM_NAME}-ci-cd
+   ```
 
 5. Gitlab - FIXME, not GitOps yet
 
-    ```yaml
-    cat <<EOF | oc -n ${TEAM_NAME}-ci-cd apply -f -
-    apiVersion: v1
-    data:
-      password: "$(echo -n ${GITLAB_PAT} | base64)"
-      username: "$(echo -n ${GITLAB_USER} | base64)"
-    kind: Secret
-    metadata:
-      annotations:
-        tekton.dev/git-0: https://${GIT_SERVER}
-      name: git-auth
-    type: kubernetes.io/basic-auth
-    EOF
-    ```
+   ```yaml
+   cat <<EOF | oc -n ${TEAM_NAME}-ci-cd apply -f -
+   apiVersion: v1
+   data:
+     password: "$(echo -n ${GITLAB_PAT} | base64)"
+     username: "$(echo -n ${GITLAB_USER} | base64)"
+   kind: Secret
+   metadata:
+     annotations:
+       tekton.dev/git-0: https://${GIT_SERVER}
+     name: git-auth
+   type: kubernetes.io/basic-auth
+   EOF
+   ```
 
 6. Hashi Vault unseal
 
@@ -172,10 +176,6 @@
 12. Add ArgoCD Service Account token for k8s auth in vault 
 
    ```bash
-   oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
-   ```
-   
-   ```bash
    vault login -method=ldap username=<USER_NAME>
    ```
 
@@ -277,13 +277,41 @@
 
    💥 DO NOT CHECK IN the gitops/secrets/vault-rainforest file just yet !! 💥
 
-17. Create all the application secrets in vault. Run this script.
+17. Update trino trustore secret
+
+   ```bash
+   openssl s_client -showcerts -connect ipa.ipa.svc.cluster.local:636 </dev/null 2>/dev/null | awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' > /tmp/ipa.pem
+   openssl s_client -showcerts -connect api.${CLUSTER_DOMAIN##apps.}:6443 </dev/null 2>/dev/null | awk '/BEGIN CERTIFICATE/,/END CERTIFICATE/ {print $0}' > /tmp/oc.pem
+   ```
+
+   ```bash
+   cd /projects/rainforest/supply-chain/trino/trino-certs
+   keytool -import -alias ca -file /projects/rainforest/supply-chain/trino/trino-certs/ca.crt -keystore truststore.jks -storepass password -trustcacerts -noprompt
+   ```
+
+   ```bash 
+   keytool -import -alias oc -file /tmp/oc.pem -keystore truststore.jks -storepass password -trustcacerts -noprompt
+   ```
+
+   ```bash
+   keytool -import -alias ipa -file /tmp/ipa.pem -keystore truststore.jks -storepass password -trustcacerts -noprompt
+   ```
+
+   ```bash
+   oc -n <TEAM_NAME>-ci-cd create secret generic truststore --from-file=truststore.jks
+   ## manually put the truststore.jks value ino the TRUSTSTORE="" variable in the #trino-truststore section of vault-secrets file
+   oc -n <TEAM_NAME>-ci-cd get secret truststore -o=jsonpath='{.data}'
+   ## remove temporary secret
+   oc -n <TEAM_NAME>-ci-cd delete secret truststore
+   ```
+
+18. Create all the application secrets in vault. Run this script.
 
    ```bash
    sh /projects/rainforest/gitops/secrets/vault-rainforest
    ```
 
-18. Encrypt rainforest vault-secrets file and check it in.
+19. Encrypt rainforest vault-secrets file and check it in.
 
    ```bash
    ansible-vault encrypt /projects/rainforest/gitops/secrets/vault-rainforest
