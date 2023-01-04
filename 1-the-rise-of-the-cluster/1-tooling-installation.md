@@ -315,6 +315,7 @@ The base tooling and operators are configured using the helm chart in the `platf
    ```bash
    helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
    helm repo add hashicorp https://helm.releases.hashicorp.com
+   helm repo add eformat https://eformat.github.io/helm-charts
    helm dep up
    ```
 
@@ -333,7 +334,7 @@ The base tooling and operators are configured using the helm chart in the `platf
    ```
 
    ```bash
-   helm upgrade --install platform-base . \
+   helm upgrade --install platform-base eformat/rainforest-base \
      --set vault.server.route.host=$VAULT_ROUTE \
      --set vault.server.extraEnvironmentVars.VAULT_TLS_SERVER_NAME=$VAULT_ROUTE \
      --namespace rainforest \
