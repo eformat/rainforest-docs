@@ -1,6 +1,6 @@
 ## 𝌭️ Licence Plate Recognition
-## Mastering Natural Language Processing
-> learn howto categorize bus repair issues
+## Use a model to recognize vehicle license plates 
+> learn howto recognize licence plates in car pictures, and extract the number from its license plate.
 
 1. We can use the instructions here in our environment - https://redhat-scholars.github.io/rhods-lp-workshop/rhods-lp-workshop/index.html
 2. Use the **Elyra TensorFlow Notebook Image**

@@ -8,7 +8,7 @@
 
 My favourite development environment has become SNO on SPOT in AWS. With this setup, if you choose your region and zones wisely, you can have an environment running all day without interruption.
 
-For me that is *Ohio* ! To get a 16 core, 64 GB machine for less than $4 a day i use the following config to [install the cluster.](https://github.com/eformat/sno-for-100)
+For me that is *Ohio* ! To get a 16 core, 64 GB machine for less than $4 a day i use the following [script and config to install the cluster.](https://github.com/eformat/sno-for-100)
 
 ```bash
 export AWS_PROFILE=rhpds
@@ -25,11 +25,15 @@ mkdir -p ~/tmp/sno-foo && cd ~/tmp/sno-foo
 curl -Ls https://raw.githubusercontent.com/eformat/sno-for-100/main/sno-for-100.sh | bash -s -- -d
 ```
 
-Once done, you should have a login to your OpenShift Cluster. There are a couple of infra-ops steps i always do, so login as _kubeadmin_ now to your cluster.
+This will take some time to complete. Once done, you should have a login to your OpenShift Cluster. There are a couple of infra-ops steps i always do, so login as _kubeadmin_ now to your cluster.
 
 ```bash
 oc login -u kubeadmin -p <kubeadmin password> https://api.$CLUSTER_NAME.$BASE_DOMAIN:6443
 ```
+
+<p class="tip">
+  ⛷️ <b>TIP</b> ⛷️ - You can easily set up a local cronjob from your laptop to run <strong>aws ec2 start-instances</strong> for your spot instance id. If the instance is killed temporarily during peak load in your aws region and zone, this will start it once capacity is available again. You can also convert the instance from SPOT back to ON-DEMAND if you wish using the <strong>ec2-spot-converter</strong> script.
+</p>
 
 ### Add HTPassword
 
