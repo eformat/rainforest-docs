@@ -78,7 +78,7 @@
    ```
 
 <p class="tip">
-  ⛷️ <b>TIP</b> ⛷️ - If the vault pod is restarted when your cluster is restared, you will need to run the unseal command. This can easily be run from a k8s cronjob.
+  ⛷️ <b>TIP</b> ⛷️ - If the vault pod is restarted when your cluster is restarted, you will need to run the unseal command. This can easily be run from a k8s cronjob.
 </p>
 
 7. Vault setup ldap auth
