@@ -1,5 +1,5 @@
 ## 𝌭️ Fraud Detection
-## Use a model to recognize fraud detection 
+## Create a model to recognize fraud detection 
 > learn howto to recognize fraud detection from a synthetic dataset
 
 1. We can use the instructions here in our environment - https://github.com/OpenShiftDemos/rhods-fraud-detection
