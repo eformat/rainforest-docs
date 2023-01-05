@@ -171,7 +171,7 @@ I use acme.sh all the time for generating Lets Encrypt certs, its easy and fast.
 
 ### Configure Extra Disk
 
-To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM Operator to use it as the default dynamic Storage Class for my SNO instance. Choose the size to meet your PVC needs, change profile, region, az and instance_id to suit.
+To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM Operator to use it as the default dynamic Storage Class for my SNO instance.
 
 1. Get your aws instance id.
 
