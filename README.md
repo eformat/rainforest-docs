@@ -3,7 +3,7 @@
 
 ![fnq](./images/fnq.jpg)
 
-👨‍🏫 👉 [The Published Slides Live Here](https://eformat.github.io/rainforest-docs) 👈 🧑‍💻
+👨‍🏫 👉 [The Published Docs Live Here](https://eformat.github.io/rainforest-docs) 👈 🧑‍💻
 
 ## 🪄 Customize The Instructions
 The box on the top of the page allows you to load the docs with variables used by your team prefilled. All you have to do is fill in the boxes on the top of the page with your teams name in the box and the domain your cluster is using and hit `save`. This will persist the values in your local storage for the site - so hitting `clear` will reset these for you if you made a mistake.
