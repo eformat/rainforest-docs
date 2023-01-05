@@ -1,24 +1,28 @@
 ## 🐙 ArgoCD
 ## ArgoCD GitOps setup
 
-1. Check env vars
+ArgoCD is a gitops controller. We will use the OpenShift Gitops operator to deploy our team based ArgoCD which will deploy and configure all of our other application tools.
+
+1. Check these environment variables are configured in your DevSpaces Terminal.
 
    ```bash
    echo $TEAM_NAME
    echo $GIT_SERVER
    ```
-   
-   ```bash
+
+2. We need to use a ServiceAccount to connect ArgoCD to Vault which we will setup shortly. For now, we will just configure the ServiceAccount name to use.
+
+   ```bash  
    export SERVICE_ACCOUNT=vault
    ```
    
-2. Helm setup
+3. Helm setup
 
    ```bash
    helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
    ```
 
-3. ArgoCD Operator
+4. We configure the cluster scoped ArgoCD Operator so that we may create a privileged Team based ArgoCD instance. [Read more about aligning Teams and ArgoCD here.](https://github.com/redhat-cop/helm-charts/blob/master/charts/gitops-operator/TEAM_DOCS.md)
 
     ```bash
     run()
@@ -43,8 +47,10 @@
     }
     run
     ```
- 
-4. Setup ArgoCD
+
+   ![argocd-team-config](./images/argocd-team-config.png)
+
+5. Setup our ArgoCD configuration. There is quite a bit of detail here. We configure the [ArgoCD Vault Plugin](https://github.com/argoproj-labs/argocd-vault-plugin) so that we can integrate our secrets management with ArgoCD.
 
    ```yaml
    cat << EOF > /tmp/argocd-values.yaml
@@ -66,7 +72,7 @@
          command: [sh, -c]
          env:
            - name: AVP_VERSION
-             value: "1.11.0"
+             value: "1.13.1"
          args:
            - >-
              curl -Lo /tmp/argocd-vault-plugin https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v\${AVP_VERSION}/argocd-vault-plugin_\${AVP_VERSION}_linux_amd64 && chmod +x /tmp/argocd-vault-plugin && mv /tmp/argocd-vault-plugin /custom-tools/
@@ -105,10 +111,10 @@
          generate:
            command: ["sh", "-c"]
            args: ["kustomize build . | argocd-vault-plugin -s ${TEAM_NAME}-ci-cd:team-avp-credentials generate -"]
-EOF
+   EOF
    ```
 
-5. Install
+6. Install ArgoCD using our configuration.
 
    ```bash
    helm upgrade --install argocd \
@@ -118,53 +124,74 @@ EOF
      redhat-cop/gitops-operator
    ```
 
-6. Login
+   You should see the pods spun up in the <TEAM_NAME>-ci-cd project.
+
+   ![argocd-install](./images/argocd-install.png)
+
+7. Login to ArgoCD using the OpenShift button. Login as <USER_NAME>, be sure to use the **FreeIPA** identity provider. On the first login you will be asked to approve OAuth permissions. 
 
     ```bash
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
 
-7. Argocd Projects setup
+   ![argocd-login](./images/argocd-login.png)
+
+8. We will use ArgoCD Projects, set these up now. The **rainforest** project is for our shared middleware, whilst the **daintree** is for our per-team tools.
 
    ```bash
    oc apply -n ${TEAM_NAME}-ci-cd -k /projects/rainforest/tenant-argocd/overlay/rainforest
    ```
 
-8. Gitlab, Group, PAT, check in code
+   You can see these in the ArgoCD UI **Settings > Projects**
 
-   Login to Gitlab and create an Internal Group called <TEAM_NAME>. Create an Internal Project called <TEAM_NAME>.
+   ![argocd-projects](./images/argocd-projects.png)
 
-9. Push our code to Gitlab. 
- 
+9. Login to Gitlab using LDAP and create an Internal Group called <TEAM_NAME>.
+
     ```bash
-    export GITLAB_USER=<USER_NAME>
-    ```
-   
-    ```bash
-    export GITLAB_PASSWORD=<PASSWORD>
+    echo https://$(oc get route gitlab-ce --template='{{ .spec.host }}' -n gitlab)
     ```
 
+    ![gitlab-group](./images/gitlab-group.png)
+
+10. Create an Internal Project called <TEAM_NAME>.
+
+    ![gitlab-project](./images/gitlab-project.png)
+
+11. We will use a **Personal Access Token** to check in the code. 
+
+    ```bash
+    export GITLAB_USER=${USER_NAME}
+    ```
+       
+    ```bash
+    export GITLAB_PASSWORD=${USER_PASSWORD}
+    ```
+    
     ```bash
     gitlab_pat
     ```
+    
+    ```bash
+    cd /projects/rainforest
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/rainforest.git
+    ```
+    
+12. Push our cloned code to Gitlab.
+    
+    ```bash
+    cd /projects/rainforest
+    git add .
+    git commit -am "🐙 ADD - rainforest 🐙"
+    git push -u origin --all
+    ```
 
-     ```bash
-     cd /projects/rainforest
-     git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/rainforest.git
-     ```
-
-     Use the `GITLAB_PAT` from above when you are prompted for the password (this will be cached)
-
-     ```bash
-     cd /projects/rainforest
-     git add .
-     git commit -am "🐙 ADD - rainforest 🐙"
-     git push -u origin --all
-     ```
-
-
-10. Create GitLab - ArgoCD webhook
+13. Let's create a GitLab webhook that triggers ArgoCD to immediately refresh when code is checked in. Browse to **Gitlab > Rainforest project > Settings > Integrations**. Add a webhook with using this url:
 
    ```bash
    echo https://$(oc -n <TEAM_NAME>-ci-cd get route argocd-server --template='{{ .spec.host}}'/api/webhook)
    ```
+
+   ![gitlab-webhook](./images/gitlab-webhook.png)
+
+🪄🪄 Now, let's carry on and configure our Secrets ... !🪄🪄
