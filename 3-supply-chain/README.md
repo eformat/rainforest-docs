@@ -1,5 +1,5 @@
 # Exercise 3 - Supply Chain
-> Build images.
+> Build and Deploy application images to our AIMLOPS platform.
 
 ## 👨‍🍳 Exercise Intro
 In this exercise, we will use GitOps to set up our working environment.

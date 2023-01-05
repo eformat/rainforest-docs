@@ -1,12 +1,12 @@
 ## 👔 Single Sign On
 ## Configure SSO
 
-1. We are using a gitops pattern to manage single sign on for our apps.
+We are using a GitOps pattern to manage single sign on for all of our apps. We create **Keycloak Users** and **Roles** using a helm chart. The **values.yaml** file contains a list of users and role mappings for each team.
 
-   Update the gitops/iam/daintree-dev/values.yaml file with UID and your name.
+1. Open and update the **rainforest/gitops/iam/daintree-dev/values.yaml** file with UID and your <USER_NAME>.
 
    ```bash
-   oc get user <USER_NAME> -o jsonpath='{.metadata.uid}'
+   oc get user ${USER_NAME} -o jsonpath='{.metadata.uid}'
    ```
    
    ```yaml
@@ -23,14 +23,16 @@
        clusterRole: edit
    ```
 
-    ```bash
-    cd /projects/rainforest
-    git add gitops/iam/daintree-dev/values.yaml
-    git commit -am "🐙 UPDATE - iam values file 🐙"
-    git push
-    ```
+   Check this file in.
 
-2. Login to SSO as admin
+   ```bash
+   cd /projects/rainforest
+   git add gitops/iam/daintree-dev/values.yaml
+   git commit -am "🐙 UPDATE - iam values file 🐙"
+   git push
+   ```
+
+2. Login to SSO **Admininstration Console** as the **admin** user.
 
    ```bash
    echo -e https://$(oc get route keycloak --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
@@ -40,5 +42,15 @@
    echo -e $(oc get secret credential-keycloak -n ${TEAM_NAME}-ci-cd -o jsonpath='{.data.ADMIN_PASSWORD}' | base64 -d)
    ```
 
-3. Delete Users -> user1, let argocd resync the user. Check Role mappings.
+3. Browse to the **Daintree-dev** Realm **Manage Users** and **Delete** <USER NAME>.
+
+   ![sso-user](./images/sso-user.png)
+
+4. ArgoCD and the SSO Operator - will resync the user created from the helm chart.
+
+   ![sso-keycloak-user](./images/sso-keycloak-user.png)
+
+   Now browse to Check Role mappings for <USER NAME>
+
+   ![sso-roles](./images/sso-roles.png)
  
