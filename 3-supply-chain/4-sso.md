@@ -3,7 +3,7 @@
 
 We are using a GitOps pattern to manage single sign on for all of our apps. We create **Keycloak Users** and **Roles** using a helm chart. The **values.yaml** file contains a list of users and role mappings for each team.
 
-1. Open and update the **rainforest/gitops/iam/daintree-dev/values.yaml** file with UID and your <USER_NAME>.
+1. Open and update the **rainforest/gitops/iam/daintree-dev/values.yaml** file with UID and your **USER_NAME**.
 
    ```bash
    oc get user ${USER_NAME} -o jsonpath='{.metadata.uid}'
@@ -42,7 +42,7 @@ We are using a GitOps pattern to manage single sign on for all of our apps. We c
    echo -e $(oc get secret credential-keycloak -n ${TEAM_NAME}-ci-cd -o jsonpath='{.data.ADMIN_PASSWORD}' | base64 -d)
    ```
 
-3. Browse to the **Daintree-dev** Realm **Manage Users** and **Delete** <USER NAME>.
+3. Browse to the **Daintree-dev** Realm **Manage Users** and **Delete** **USER_NAME**.
 
    ![sso-user](./images/sso-user.png)
 

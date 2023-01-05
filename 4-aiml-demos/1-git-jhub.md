@@ -47,7 +47,7 @@
 
 ## Login to JupyterHub
 
-5. Login to daintree-dev project, browse to Jupyterhub route. Login as your <USER_NAME> using the **OpenShift v4** button and **FreeIPA** identity provider.
+5. Login to daintree-dev project, browse to Jupyterhub route. Login as your **USER_NAME** using the **OpenShift v4** button and **FreeIPA** identity provider.
 
    ```bash
    echo -e https://$(oc get route jupyterhub --template='{{ .spec.host }}' -n ${PROJECT_NAME})

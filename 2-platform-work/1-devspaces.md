@@ -3,7 +3,7 @@
 
 We will use the DevSpaces web IDE as our code editor and toolbench for setting up the AIMLOPS Platform.
 
-1. Login to your DevSpaces Editor as your data science user <USER_NAME> e.g. **user1** - be sure to select the **FreeIPA** identity provider when logging in.
+1. Login to your DevSpaces Editor as your data science user **USER_NAME** e.g. **user1** - be sure to select the **FreeIPA** identity provider when logging in.
 
    ![devspaces-link](./images/devspaces-link.png)
 

@@ -168,7 +168,7 @@ We are going to configure Hashicorp Vault as our application secret backend. A s
     
     ![secrets-vault-acl-1](./images/secrets-vault-acl-1.png)
 
-14. Test that ldap login works for <USER_NAME>. Use your <USER_PASSWORD> when prompted.
+14. Test that ldap login works for **USER_NAME**. Use your **USER_PASSWORD** when prompted.
 
     ```bash
     vault login -method=ldap username=${USER_NAME}
@@ -225,7 +225,7 @@ We are going to configure Hashicorp Vault as our application secret backend. A s
    vault secrets enable -path=kv/ -version=2 kv
    ```
 
-19. The rest of the steps can now be carried out by our data science user in a self-service manner. Log back in as our <USER_NAME> to provision the ArgoCD Service Account token for k8s auth in vault.
+19. The rest of the steps can now be carried out by our data science user in a self-service manner. Log back in as our **USER_NAME** to provision the ArgoCD Service Account token for k8s auth in vault.
 
    ```bash
    vault login -method=ldap username=${USER_NAME}

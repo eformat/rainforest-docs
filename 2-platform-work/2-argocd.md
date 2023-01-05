@@ -128,7 +128,7 @@ ArgoCD is a gitops controller. We will use the OpenShift Gitops operator to depl
 
    ![argocd-install](./images/argocd-install.png)
 
-7. Login to ArgoCD using the OpenShift button. Login as <USER_NAME>, be sure to use the **FreeIPA** identity provider. On the first login you will be asked to approve OAuth permissions. 
+7. Login to ArgoCD using the OpenShift button. Login as **USER_NAME**, be sure to use the **FreeIPA** identity provider. On the first login you will be asked to approve OAuth permissions. 
 
     ```bash
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
