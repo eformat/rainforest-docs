@@ -1,9 +1,13 @@
 ## 🐑️ Initialize Git Repositories, Login to JupyterHub
 ## Initialize a DAG repository for Airflow
 
-1. Gitlab, under your group <TEAM_NAME>, create a dag repo called **daintree-dev-dags**
+We need to set up our Data Science JupyterHub environment so we can run the Airflow demo's. Let's do that now.
 
-2. In DevSpaces initialize dags repo.
+1. Login to Gitlab and under your group <TEAM_NAME> create a dag project repo called **daintree-dev-dags**
+
+   ![1-dags-repo](./images/1-dags-repo.png)
+
+2. In DevSpaces initialize the dags repo.
 
     ```bash
     cd /projects
@@ -31,6 +35,8 @@
 
 4. Create an Internal project in Gitlab called **aiml-demos** and push the code.
 
+   ![1-aiml-demo-repo](./images/1-aiml-demo-repo.png)
+
     ```bash
     cd /projects/aiml-demos
     git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/aiml-demos.git
@@ -47,13 +53,15 @@
 
 ## Login to JupyterHub
 
-5. Login to daintree-dev project, browse to Jupyterhub route. Login as your **USER_NAME** using the **OpenShift v4** button and **FreeIPA** identity provider.
+5. Login to daintree-dev project in OpenShift. Browse to the Jupyterhub route. Login as your **USER_NAME** using the **OpenShift v4** button and **FreeIPA** identity provider. You will be prompted to allow **OAuth permissions** the first time you login.
 
    ```bash
    echo -e https://$(oc get route jupyterhub --template='{{ .spec.host }}' -n ${PROJECT_NAME})
    ```
 
-6. Select **Elyra Notebook Image**, Select **Default** container size, Set the following env vars, get values from DevSpaces
+   ![1-jhub-landing-page](./images/1-jhub-landing-page.png)
+
+6. Select the **Elyra Notebook Image**. Select the **Default** container size. Add the following **Environment variables** which you can get from the DevSpaces terminal.
 
    ```bash
    echo $CLUSTER_DOMAIN
@@ -74,17 +82,23 @@
    echo $AWS_SECRET_ACCESS_KEY
    ```
 
-8. Click **Start server** button.
+   ![1-jhub-env-vars](./images/1-jhub-env-vars.png)
 
-9. Once your notebook has opened, Click **Terminal** and clone the aiml-demos repo.
+7. Click **Start server** button.
+
+   ![1-jhub-start-server](./images/1-jhub-start-server.png)
+
+8. Once your notebook has opened, Click **Terminal** and clone the aiml-demos repo.
 
    ```bash
    git clone https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/aiml-demos.git
    ```
 
+   ![jhub-aiml-demo-repo](./images/1-jhub-aiml-demo-repo.png)
+
 ## Setup Elyra Airflow
 
-9. Add the **airflow-runner** container image
+9. Add the **airflow-runner** container image from the terminal.
 
    ```json
    mkdir -p ~/.local/share/jupyter/metadata/runtime-images/
@@ -101,6 +115,10 @@
    }
    EOF
    ```
+   
+   Once added, Select the **Runtime Images** navigation on the left side panel to view the added image.
+
+   ![jhub-runner-image](./images/1-jhub-runner-image.png)
 
 10. Add the **ariflow** runtime configuration.
 
@@ -131,3 +149,7 @@
    }
    EOF
    ```
+
+   Once added, Select the **Runtimes** navigation on the left side panel to view the added runtime.
+   
+   ![jhub-runtime](./images/1-jhub-runtime.png)

@@ -31,7 +31,7 @@ My favourite development environment has become SNO on SPOT in AWS. With this se
    
    ![sno-for-100-start](./images/sno-for-100-start.png)
    
-2.   Once done, you should have a login to your OpenShift Cluster printed in the console output. There are some infra-ops steps we need to do from the command line, so login as _kubeadmin_ now to your cluster.
+2.   Once done, you should have a login to your OpenShift Cluster printed in the console output. There are some infra-ops steps we need to do from the command line, so login now as _kubeadmin_ to your cluster.
    
    ```bash
    export CLUSTER_DOMAIN=<CLUSTER_DOMAIN>
@@ -288,7 +288,13 @@ To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM O
 
    ```bash
    oc annotate sc/odf-lvm-vgsno storageclass.kubernetes.io/is-default-class=true
+   ```
+   
+   Remove old defaults (the default SC varies depending on OpenShift Cluster version)
+
+   ```bash
    oc annotate sc/gp2 storageclass.kubernetes.io/is-default-class-
+   oc annotate sc/gp3-csi storageclass.kubernetes.io/is-default-class-
    ```
 
    ![lvm-sc](./images/lvm-sc.png)
