@@ -341,13 +341,13 @@ We have an encrypted file with all of the vault commands pre-baked to create our
 
    ![secrets-global-replace](./images/secrets-global-replace.png)
 
-   Replace the cluster domain in the code with **our actual** cluster domain.
+   Use **Replace All** for the cluster domain in the code with **our actual** cluster domain.
 
    ```bash
-   foo-sno.sandbox1234.opentlc.com ->  echo ${CLUSTER_DOMAIN##apps.}
+   foo.sandbox1234.opentlc.com ->  echo ${CLUSTER_DOMAIN##apps.}
    ```
 
-   Replace Github coordinates with our gitlab ones. 
+   Use **Replace All** for the Github coordinates with our Gitlab ones. 
 
    ```bash
    github.com/eformat ->  <GIT_SERVER>/<TEAM_NAME>

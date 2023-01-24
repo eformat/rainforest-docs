@@ -146,7 +146,7 @@ ArgoCD is a gitops controller. We will use the OpenShift Gitops operator to depl
 
    ![argocd-projects](./images/argocd-projects.png)
 
-9. Login to Gitlab using LDAP and create an Internal Group called <TEAM_NAME>.
+9. Login to Gitlab using LDAP and create an Internal Group called **<TEAM_NAME>**.
 
     ```bash
     echo https://$(oc get route gitlab-ce --template='{{ .spec.host }}' -n gitlab)
@@ -154,7 +154,7 @@ ArgoCD is a gitops controller. We will use the OpenShift Gitops operator to depl
 
     ![gitlab-group](./images/gitlab-group.png)
 
-10. Create an Internal Project called <TEAM_NAME>.
+10. Create an Internal Project called **<TEAM_NAME>**.
 
     ![gitlab-project](./images/gitlab-project.png)
 
