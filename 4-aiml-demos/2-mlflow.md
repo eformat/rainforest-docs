@@ -120,4 +120,4 @@
 
    ![2-mlflow-curl](./images/2-mlflow-curl.png)
 
-🪄🪄 Congratulations !! You have now trained, built and deployed and tested your first ML model !! 🪄🪄
+🪄🪄 Congratulations !! You have now trained, built, deployed and tested your first ML model !! 🪄🪄
