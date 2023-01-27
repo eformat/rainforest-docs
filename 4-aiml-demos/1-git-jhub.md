@@ -14,7 +14,9 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
     git clone https://<GIT_SERVER>/rainforest/daintree-dev-dags.git
     cd daintree-dev-dags
     echo "# rainforest/daintree-dev-dags" > README.md
-    git add README.md
+    echo "# ignore the symlinked directory" > .airflowignore
+    echo "daintree-dev-dags.git" >> .airflowignore
+    git add README.md .airflowignore
     git commit -m "🦩 initial commit 🦩"
     git branch -M main
     git push -u origin main
