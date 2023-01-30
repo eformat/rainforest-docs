@@ -1,18 +1,24 @@
 ## 𝌭️ Object Detection
 ## Create a model to recognize dogs and cats 
-> learn howto to recognize fraud detection from a synthetic dataset
+> learn howto to recognize your pets in images !
 
 1. We can use the instructions here in our environment - https://redhat-scholars.github.io/rhods-od-workshop
+
+   ```bash
+   cd /opt/app-root/src
+   git clone https://github.com/rh-aiservices-bu/object-detection-rest.git
+   ```
+
 2. Use the **Elyra TensorFlow Notebook Image**
 3. There are some minor changes required when running the first notebook - **1-explore.ipynb**.
 
-   Download data
+   Download test data image
 
    ```bash
    wget https://github.com/eformat/object-detection-rest/releases/download/0.0.1/twodogs.jpg
    ```
 
-   Copy to s3
+   Copy it to s3
 
    ```bash
    mc cp twodogs.jpg dev/data
@@ -35,6 +41,8 @@
    client.download_file('data', 'twodogs.jpg', 'twodogs.jpg')
    ```
 
+   ![11-object-data-load](./images/11-object-data-load.png)
+
 4. When you get to the app part using Flask in **2_predict.ipynb**, install these deps only, edit requirements.txt to contain:
 
    ```bash
@@ -42,3 +50,7 @@
    Flask
    gunicorn
    ```
+
+5. The Flask app test in **4_test_flask.ipynb** should run OK.
+
+   ![11-object-detection](./images/11-object-detection.png)
