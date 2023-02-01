@@ -2,15 +2,16 @@
 > AIML demo applications
 
 ## 👨‍🍳 Exercise Intro
-In this exercise, we will use GitOps to set up our working environment.
+In this exercise, we will use our AIMLOPS platform tools to run lots of demo applications.
 
 ## 🖼️ Big Picture
 ![empty-big-picture](images/big-picture-empty.jpg)
 
 ## 🔮 Learning Outcomes
 
-- [ ] Can install the components which are necessary to run the exercises
+- [ ] Can have fun with python, notebooks, jupyterhub, mlfow, airflow, spark, seldon and much more  !
+- [ ] Can learn about AIML safely !
 
 ## 🔨 Tools used in this exercise!
 * Openshift 4.11+
-* <span style="color:blue;">[Helm](https://helm.sh/)</span> - Helps us to define, install, and upgrade Kubernetes application.
+* All the AI tools !
