@@ -11,7 +11,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
     ```bash
     cd /projects
-    git clone https://<GIT_SERVER>/rainforest/daintree-dev-dags.git
+    git clone https://<GIT_SERVER>/<TEAM_NAME>/daintree-dev-dags.git
     cd daintree-dev-dags
     echo "# rainforest/daintree-dev-dags" > README.md
     echo "# ignore the symlinked directory" > .airflowignore
@@ -110,7 +110,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
      "metadata": {
        "tags": [],
        "display_name": "airflow-runner",
-       "image_name": "image-registry.openshift-image-registry.svc:5000/rainforest-ci-cd/airflow-runner:2.3.2",
+       "image_name": "image-registry.openshift-image-registry.svc:5000/<TEAM_NAME>-ci-cd/airflow-runner:2.3.2",
        "pull_policy": "Always"
      },
      "schema_name": "runtime-image"
@@ -140,7 +140,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
          "github_branch": "main",
          "github_repo_token": "${GITLAB_PAT}",
          "cos_auth_type": "KUBERNETES_SECRET",
-         "cos_endpoint": "http://minio.rainforest-ci-cd.svc.cluster.local:9000",
+         "cos_endpoint": "http://minio.<TEAM_NAME>-ci-cd.svc.cluster.local:9000",
          "cos_bucket": "airflow-daintree-dev",
          "cos_secret": "s3-auth",
          "cos_username": "${AWS_ACCESS_KEY_ID}",

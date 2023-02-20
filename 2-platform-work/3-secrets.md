@@ -303,7 +303,7 @@ We are going to configure Hashicorp Vault as our application secret backend. A s
    ```bash
    export APP_NAME=secret-test
    export TEAM_GROUP=student
-   export PROJECT_NAME=rainforest-ci-cd
+   export PROJECT_NAME=<TEAM_NAME>-ci-cd
    ```
    
    ```bash
@@ -382,7 +382,7 @@ We have an encrypted file with all of the vault commands pre-baked to create our
    oc -n <TEAM_NAME>-ci-cd create secret generic truststore --from-file=truststore.jks
    ```
    
-   Manually update the truststore.jks value variable - TRUSTSTORE="" in the #trino-truststore section of **vault-rinforest** secrets file.
+   Manually update the truststore.jks value variable - TRUSTSTORE="" in the #trino-truststore section of **vault-rainforest** secrets file.
 
    ```bash
    oc -n <TEAM_NAME>-ci-cd get secret truststore -o=jsonpath='{.data}'
@@ -396,7 +396,13 @@ We have an encrypted file with all of the vault commands pre-baked to create our
    oc -n <TEAM_NAME>-ci-cd delete secret truststore
    ```
 
-4. Create all the application secrets in vault. Run this script.
+4. If your <TEAM_NAME> is *not* *rainforest*, **Replace All** across files:
+
+   ```bash
+   rainforest-ci-cd ->  <TEAM_NAME>-ci-cd
+   ```
+
+5. Create all the application secrets in vault. Run this script.
 
    ```bash
    sh /projects/rainforest/gitops/secrets/vault-rainforest
@@ -408,7 +414,7 @@ We have an encrypted file with all of the vault commands pre-baked to create our
 
    You can also browse to these in the Vault UI.
 
-5. Encrypt rainforest vault-secrets file and check all our changes into git.
+6. Encrypt rainforest vault-secrets file and check all our changes into git.
 
    ```bash
    ansible-vault encrypt /projects/rainforest/gitops/secrets/vault-rainforest
