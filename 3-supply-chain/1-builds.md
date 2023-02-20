@@ -50,7 +50,7 @@ We use the ArgoCD app-of-apps pattern to deploy the set of applications that wou
 
    ☕☕☕ Monitor the Builds, they should all succeed. Some may need restarting if they fail for an unknown reason. Now is a great time to get some coffee, this step can take ~60mins ☕☕☕
 
-   There is a convenience Tekton Pipeline configured to restart all builds together. We don't need to use this in the first instance.
+   There is a convenience Tekton Pipeline configured to restart all builds together. If the node reboot for pod increase stops the builds - you can trigger them all in one go by starting this Pipeline.
 
    ![build-pipeline](./images/build-pipeline.png)
 
