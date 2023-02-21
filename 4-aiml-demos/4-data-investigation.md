@@ -53,7 +53,7 @@
    ![4-superet-connect-ok](./images/4-superet-connect-ok.png)
 
 8. Browse to **SQLLab > SLQEditor**
-9. Create a **hive catalog** from our **wine_quality.csv** data stored in S3.
+9. Create a **hive catalog** from our **wine_quality.csv** data stored in S3 (make sure you copy the csv fle into s3 from the Spark Exercise)
 
    ```iso92-sql
    CREATE TABLE hive.default.wine_quality

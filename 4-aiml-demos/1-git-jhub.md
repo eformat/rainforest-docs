@@ -63,7 +63,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
    ![1-jhub-landing-page](./images/1-jhub-landing-page.png)
 
-6. Select the **Elyra Notebook Image**. Select the **Default** container size. Add the following **Environment variables** which you can get from the DevSpaces terminal.
+6. Select the **Elyra Notebook Image - v0.1.5**. Select the **Default** container size. Add the following **Environment variables** which you can get from the DevSpaces terminal.
 
    ```bash
    echo $CLUSTER_DOMAIN
@@ -110,7 +110,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
      "metadata": {
        "tags": [],
        "display_name": "airflow-runner",
-       "image_name": "image-registry.openshift-image-registry.svc:5000/<TEAM_NAME>-ci-cd/airflow-runner:2.3.2",
+       "image_name": "image-registry.openshift-image-registry.svc:5000/<TEAM_NAME>-ci-cd/airflow-runner:2.5.1",
        "pull_policy": "Always"
      },
      "schema_name": "runtime-image"
