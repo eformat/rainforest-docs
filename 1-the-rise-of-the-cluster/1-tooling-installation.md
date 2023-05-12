@@ -481,10 +481,10 @@ The Rainforest base tooling and operators are configured using a helm chart. Thi
 
    ![devspaces-pods](./images/devspaces-pods.png)
 
-4. **FIXME** - We need to add specific RBAC for our data science user group. For now make them cluster-admins.
+4. We need to add specific RBAC for our data science user group. We will give them namespace edit access on the `daintree-dev` project where their data science tools will live.
 
    ```bash
-   oc adm policy add-cluster-role-to-group cluster-admin student 
+   oc adm policy add-role-to-group edit student -n daintree-dev 
    ```
 
 🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄
