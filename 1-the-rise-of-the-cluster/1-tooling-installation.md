@@ -471,7 +471,8 @@ The Rainforest base tooling and operators are configured using a helm chart. Thi
      --namespace rainforest \
      --create-namespace \
      --timeout=15m \
-     --debug
+     --debug \
+     -f cluster-dev-values.yaml
    ```
 
    It will take a little time to download, install and configure all the bits. Check the Status of the DevSpaces pods in the **rainforest-workspaces** project as these take the longest time to provision. 

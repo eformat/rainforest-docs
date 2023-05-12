@@ -1,30 +1,9 @@
 ## 🐑️ Initialize Git Repositories, Login to JupyterHub
 ## Initialize a DAG repository for Airflow
 
-We need to set up our Data Science JupyterHub environment so we can run the Airflow demo's. Let's do that now.
-
-1. Login to Gitlab and under your group <TEAM_NAME> create a dag project repo called **daintree-dev-dags**
-
-   ![1-dags-repo](./images/1-dags-repo.png)
-
-2. In DevSpaces initialize the dags repo.
-
-    ```bash
-    cd /projects
-    git clone https://<GIT_SERVER>/<TEAM_NAME>/daintree-dev-dags.git
-    cd daintree-dev-dags
-    echo "# rainforest/daintree-dev-dags" > README.md
-    echo "# ignore the symlinked directory" > .airflowignore
-    echo "daintree-dev-dags.git" >> .airflowignore
-    git add README.md .airflowignore
-    git commit -m "🦩 initial commit 🦩"
-    git branch -M main
-    git push -u origin main
-    ```
-
 ## Clone code demo repo
 
-3. Clone our demo code repo. The token will be provided by your instructor.
+1. Clone our demo code repo. The token will be provided by your instructor.
 
    ```bash
    export GITHUB_TOKEN=<token>
@@ -35,7 +14,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
    git clone https://eformat:${GITHUB_TOKEN}@github.com/eformat/aiml-demos.git
    ```
 
-4. Create an Internal project in Gitlab called **aiml-demos** and push the code.
+2. Create an Internal project in Gitlab called **aiml-demos** and push the code.
 
    ![1-aiml-demo-repo](./images/1-aiml-demo-repo.png)
 
@@ -55,7 +34,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
 ## Login to JupyterHub
 
-5. Login to daintree-dev project in OpenShift. Browse to the Jupyterhub route. Login as your **USER_NAME** using the **OpenShift v4** button and **FreeIPA** identity provider. You will be prompted to allow **OAuth permissions** the first time you login.
+3. Login to daintree-dev project in OpenShift. Browse to the Jupyterhub route. Login as your **USER_NAME** using the **OpenShift v4** button and **FreeIPA** identity provider. You will be prompted to allow **OAuth permissions** the first time you login.
 
    ```bash
    echo -e https://$(oc get route jupyterhub --template='{{ .spec.host }}' -n ${PROJECT_NAME})
@@ -63,7 +42,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
    ![1-jhub-landing-page](./images/1-jhub-landing-page.png)
 
-6. Select the **Elyra Notebook Image - v0.1.5**. Select the **Default** container size. Add the following **Environment variables** which you can get from the DevSpaces terminal.
+4. Select the **Elyra Notebook Image - v0.1.5**. Select the **Default** container size. Add the following **Environment variables** which you can get from the DevSpaces terminal.
 
    ```bash
    echo $CLUSTER_DOMAIN
@@ -86,11 +65,11 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
    ![1-jhub-env-vars](./images/1-jhub-env-vars.png)
 
-7. Click **Start server** button.
+5. Click **Start server** button.
 
    ![1-jhub-start-server](./images/1-jhub-start-server.png)
 
-8. Once your notebook has opened, Click **Terminal** and clone the aiml-demos repo.
+6. Once your notebook has opened, Click **Terminal** and clone the aiml-demos repo.
 
    ```bash
    git clone https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/aiml-demos.git
@@ -100,7 +79,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
 ## Setup Elyra Airflow
 
-9. Add the **airflow-runner** container image from the terminal.
+7. Add the **airflow-runner** container image from the terminal.
 
    ```json
    mkdir -p ~/.local/share/jupyter/metadata/runtime-images/
@@ -122,7 +101,7 @@ We need to set up our Data Science JupyterHub environment so we can run the Airf
 
    ![jhub-runner-image](./images/1-jhub-runner-image.png)
 
-10. Add the **ariflow** runtime configuration.
+8. Add the **ariflow** runtime configuration.
 
    ```json
    mkdir -p ~/.local/share/jupyter/metadata/runtimes

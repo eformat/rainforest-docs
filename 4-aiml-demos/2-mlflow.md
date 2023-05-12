@@ -120,4 +120,8 @@
 
    ![2-mlflow-curl](./images/2-mlflow-curl.png)
 
+14. If you have elastic and the seldon request logger deployed, you can browse to the Request and Response log capture.
+
+   ![2-mlflow-kibana](./images/2-mlflow-kibana.png)
+
 🪄🪄 Congratulations !! You have now trained, built, deployed and tested your first ML model !! 🪄🪄
