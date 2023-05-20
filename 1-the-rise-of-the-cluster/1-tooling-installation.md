@@ -462,19 +462,32 @@ The Rainforest base tooling and operators are configured using a helm chart. Thi
    helm dep up
    ```
 
-2. We need to specify the Vault Route as a helm chart parameter.
+2. We need to specify the Vault Route as a helm chart parameter as well as pass a GitLab root password.
 
    ```bash
    export VAULT_ROUTE=vault.<CLUSTER_DOMAIN>
    ```
 
-3. Install the Rainforest platform base tooling.
+   ```bash
+   export GITLAB_ROOT_PASSWORD=$(openssl rand -hex 8)
+   ```
+
+3. Install the Rainforest Platform base tooling.
 
    ```bash
-   helm upgrade --install platform-base eformat/rainforest-base \
+   cd platform/base
+   ```
+
+   ```bash
+   helm dep up
+   ```
+
+   ```bash
+   helm upgrade --install platform-base . \
      --set vault.server.route.host=$VAULT_ROUTE \
      --set vault.server.extraEnvironmentVars.VAULT_TLS_SERVER_NAME=$VAULT_ROUTE \
-     --namespace rainforest \
+     --set gitlab.root_password=$GITLAB_ROOT_PASSWORD \
+     --namespace data-mesh \
      --create-namespace \
      --timeout=15m \
      --debug \
