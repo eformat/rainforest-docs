@@ -487,7 +487,7 @@ The Rainforest base tooling and operators are configured using a helm chart. Thi
      --set vault.server.route.host=$VAULT_ROUTE \
      --set vault.server.extraEnvironmentVars.VAULT_TLS_SERVER_NAME=$VAULT_ROUTE \
      --set gitlab.root_password=$GITLAB_ROOT_PASSWORD \
-     --namespace data-mesh \
+     --namespace rainforest \
      --create-namespace \
      --timeout=15m \
      --debug \
