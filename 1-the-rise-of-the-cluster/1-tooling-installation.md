@@ -170,6 +170,12 @@ I use acme.sh all the time for generating Lets Encrypt certs, its easy and fast.
    watch oc get co
    ```
 
+9. (Optional) If you think you will need more than the 250 pods per node, apply the large pods `kubeletconfig` - this will reboot the SNO cluster.
+
+   ```bash
+   oc apply -f platform/kubelet-config.yaml
+   ```
+   
 ### Configure Extra Disk
 
 To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM Operator to use it as the default dynamic Storage Class for my SNO instance.
