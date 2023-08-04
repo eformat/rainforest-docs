@@ -5,7 +5,7 @@ projects:
   - clonePath: data-mesh-pattern
     git:
       remotes:
-        origin: 'https://github.com/opendatahub-io-contrib/data-mesh-pattern'
+        origin: 'https://github.com/opendatahub-io-contrib/data-mesh-pattern.git'
     name: data-mesh-pattern
 components:
   - container:
