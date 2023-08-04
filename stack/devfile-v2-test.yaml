@@ -2,9 +2,7 @@ schemaVersion: 2.1.0
 metadata:
   name: data-mesh
 projects:
-  - attributes:
-      source-origin: branch
-    clonePath: data-mesh-pattern
+  - clonePath: data-mesh-pattern
     git:
       remotes:
         origin: 'https://github.com/opendatahub-io-contrib/data-mesh-pattern'
