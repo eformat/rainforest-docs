@@ -12,7 +12,7 @@ attributes:
 projects:
   - attributes:
       source-origin: branch
-    clonePath: rainforest
+    clonePath: data-mesh-pattern
     git:
 # cannot load devfile from private repo - https://access.redhat.com/solutions/5859851
 # checkoutFrom Bug - https://issues.redhat.com/browse/CRW-3381
