@@ -249,6 +249,7 @@ To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM O
 
 8. Create the operator subscription.
 
+   OpenShift v4.11
    ```bash
    cat <<EOF | oc apply -f-
    apiVersion: operators.coreos.com/v1alpha1
@@ -266,6 +267,27 @@ To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM O
      sourceNamespace: openshift-marketplace
    EOF
    ```
+
+   OpenShift v4.12+ e.g. set channel - stable-4.12, stable-4.13, stable-4.14
+   ```bash
+   CHANNEL=stable-4.14
+   cat <<EOF | oc apply -f-
+   apiVersion: operators.coreos.com/v1alpha1
+   kind: Subscription
+   metadata:
+     labels:
+       operators.coreos.com/odf-lvm-operator.openshift-storage: ''
+     name: lvms-operator
+     namespace: openshift-storage
+   spec:
+     channel: stable-4.14
+     installPlanApproval: Automatic
+     name: lvms-operator
+     source: redhat-operators
+     sourceNamespace: openshift-marketplace
+   EOF
+   ```
+
 
 9. Wait until the operator has installed successfully.
 
