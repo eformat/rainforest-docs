@@ -369,14 +369,14 @@ We are going to use IPA for our data science users.
 5. Then create our objects. Initialize admin.
    
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "echo ${ADMIN_PASSWORD} | /usr/bin/kinit admin"
    ```
 
 6. Create the ldap bind user.
    
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "echo ${LDAP_ADMIN_PASSWORD} | \
    ipa user-add ldap_admin --first=ldap \
    --last=admin --email=ldap_admin@redhatlabs.dev --password"
@@ -385,24 +385,24 @@ We are going to use IPA for our data science users.
 7. Add groups to ldap bind user.
    
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "ipa group-add-member admins --users=ldap_admin"
    ```
 
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "ipa group-add-member editors --users=ldap_admin"
    ```
    
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "ipa group-add-member 'trust admins' --users=ldap_admin"
    ```
 
 8. Create a group for our data science users.
 
    ```bash
-   oc exec -it dc/ipa -n ipa -- \
+   oc exec -it deploy/ipa -n ipa -- \
    sh -c "ipa group-add student --desc 'Student Group'"
    ```
 
@@ -421,7 +421,7 @@ We are going to use IPA for our data science users.
 10. Create the user.
 
     ```bash
-    oc exec -it dc/ipa -n ipa -- \
+    oc exec -it deploy/ipa -n ipa -- \
     sh -c "echo ${USER_PASSWORD} | ipa user-add ${USER_NAME} --first=${USER_NAME} \
     --last=${USER_NAME} --email=${USER_NAME}@redhatlabs.dev --password"
     ```
@@ -429,7 +429,7 @@ We are going to use IPA for our data science users.
 11. Add user to our group.
 
     ```bash
-    oc exec -it dc/ipa -n ipa -- \
+    oc exec -it deploy/ipa -n ipa -- \
     sh -c "ipa group-add-member student --users=${USER_NAME}"
     ```
 
