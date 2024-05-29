@@ -296,7 +296,7 @@ ArgoCD is a gitops controller. We will use the OpenShift Gitops operator to depl
 
     ![gitlab-group](./images/gitlab-group.png)
 
-12. Create an Internal Project called **data-mesh-pattern**.
+12. Create an Internal Project called **rainforest**.
 
     ![gitlab-project](./images/gitlab-project.png)
 
