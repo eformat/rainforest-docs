@@ -280,7 +280,7 @@ To keep things cheap, I use a 200GB gp3 volume and configure the OpenShift LVM O
      name: lvms-operator
      namespace: openshift-storage
    spec:
-     channel: stable-4.14
+     channel: ${CHANNEL}
      installPlanApproval: Automatic
      name: lvms-operator
      source: redhat-operators
